@@ -32,8 +32,9 @@ def message(payload):
     if "what day is it?" in text.lower():
         if datetime.datetime.today().weekday() == 2:
             MESSAGE_BLOCK = {
-                "type": "section",
-                "text": {"type": "mrkdwn", "text": "https://i.imgur.com/hy8S3NC.jpg"},
+                "type": "image",
+                "image_url": "https://i.imgur.com/hy8S3NC.jpg",
+                "alt_text": "wednesday frog",
             }
             channel_id = event.get("channel")
             message = {"channel": channel_id, "blocks": [MESSAGE_BLOCK]}
