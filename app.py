@@ -8,10 +8,10 @@ from slackeventsapi import SlackEventAdapter
 app = Flask(__name__)
 
 slack_events_adapter = SlackEventAdapter(
-    os.getenv("SLACK_EVENTS_TOKEN"), "/slack/events", app
+    os.getenv("SLACK_SIGNING_SECRET"), "/slack/events", app
 )
 
-slack_web_client = WebClient(token=os.getenv("SLACKBOT_TOKEN"))
+slack_web_client = WebClient(token=os.getenv("SLACK_CLIENT_SECRET"))
 
 
 # responds to sent messages
