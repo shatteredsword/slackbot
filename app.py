@@ -2,7 +2,7 @@ import datetime
 import os
 import logging
 from flask import Flask
-from slack import WebClient
+from slack_sdk import WebClient
 from slackeventsapi import SlackEventAdapter
 
 app = Flask(__name__)
