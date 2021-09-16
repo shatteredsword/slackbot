@@ -2,16 +2,13 @@
 name = "slackbot"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Sean Mayo <sean.mayo@matsonfruit.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-slack-sdk = "^3.11.0"
-slackeventsapi = "^3.0.0"
+slack-bolt = "^1.9.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
-black = "^21.9b0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -1,51 +1,34 @@
 import datetime
 import os
 import logging
-from flask import Flask
-from slack_sdk import WebClient
-from slackeventsapi import SlackEventAdapter
+from slack_bolt import App
+from slack_bolt.adapter.socket_mode import SocketModeHandler
 
-app = Flask(__name__)
-
-slack_events_adapter = SlackEventAdapter(
-    os.getenv("SLACK_SIGNING_SECRET"), "/slack/events", app
+app = App(
+    token=os.environ.get("SLACKBOT_OAUTH_TOKEN"),
+    # signing_secret=os.environ.get("SLACK_SIGNING_SECRET") # not required for socket mode
 )
 
-slack_web_client = WebClient(token=os.getenv("SLACKBOT_OAUTH_TOKEN"))
-
-
-# responds to sent messages
-@slack_events_adapter.on("message")
-def message(payload):
-    event = payload.get("event", {})
-    text = event.get("text")
-
-    if "hello pytexas" in text.lower():
-        MESSAGE_BLOCK = {
-            "type": "section",
-            "text": {"type": "mrkdwn", "text": "Howdy! :face_with_cowboy_hat:"},
-        }
-        channel_id = event.get("channel")
-        message = {"channel": channel_id, "blocks": [MESSAGE_BLOCK]}
-        slack_web_client.chat_postMessage(**message)
-
-    if "what day is it?" in text.lower():
-        if datetime.datetime.today().weekday() == 2:
-            MESSAGE_BLOCK = {
-                "type": "image",
-                "image_url": "https://i.imgur.com/hy8S3NC.jpg",
-                "alt_text": "wednesday frog",
+# Listens to incoming messages that contain "hello"
+@app.message(":wave:")
+def message_hello(message, say):
+    # say() sends a message to the channel where the event was triggered
+    say(
+        blocks=[
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": f"Hey there <@{message['user']}>!"},
+                "accessory": {
+                    "type": "button",
+                    "text": {"type": "plain_text", "text": "Click Me"},
+                    "action_id": "button_click",
+                },
             }
-            channel_id = event.get("channel")
-            message = {"channel": channel_id, "blocks": [MESSAGE_BLOCK]}
-            slack_web_client.chat_postMessage(**message)
+        ],
+        text=f"Hey there <@{message['user']}>!",
+    )
 
 
+# Start your app
 if __name__ == "__main__":
-    logger = logging.getLogger()
-
-    logger.setLevel(logging.DEBUG)
-
-    logger.addHandler(logging.StreamHandler())
-
-    app.run(host="0.0.0.0", port=8080)
+    SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
