@@ -13,7 +13,7 @@ from slack_sdk.oauth.state_store import FileOAuthStateStore
 oauth_settings = OAuthSettings(
     client_id=os.environ["SLACK_CLIENT_ID"],
     client_secret=os.environ["SLACK_CLIENT_SECRET"],
-    scopes=["channels:history", "chat:write", "chat:write.customize"],
+    scopes=["channels:read", "groups:read", "chat:write"],
     installation_store=FileInstallationStore(base_dir="./data"),
     state_store=FileOAuthStateStore(expiration_seconds=600, base_dir="./data")
 )
