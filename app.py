@@ -62,7 +62,13 @@ def open_modal(ack, shortcut, client):
         }
     )
 
-
+# The echo command simply echoes on command
+@app.command("/echo")
+def repeat_text(ack, respond, command):
+    # Acknowledge command request
+    ack()
+    respond(f"{command['text']}")
+l
 
 # Start your app
 if __name__ == "__main__":
