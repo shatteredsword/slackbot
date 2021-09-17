@@ -2,26 +2,13 @@ import datetime
 import os
 import logging
 from slack_bolt import App
-from slack_bolt.oauth.oauth_settings import OAuthSettings
-from slack_sdk.oauth.installation_store import FileInstallationStore
-from slack_sdk.oauth.state_store import FileOAuthStateStore
-
-# os.environ["SLACK_CLIENT_ID"] = ""
-# os.environ["SLACK_CLIENT_SECRET"] = ""
-# os.environ["SIGNING_SECRET"] = ""
-
-oauth_settings = OAuthSettings(
-    client_id=os.environ["SLACK_CLIENT_ID"],
-    client_secret=os.environ["SLACK_CLIENT_SECRET"],
-    scopes=["channels:read", "groups:read", "chat:write"],
-    installation_store=FileInstallationStore(base_dir="./data"),
-    state_store=FileOAuthStateStore(expiration_seconds=600, base_dir="./data")
-)
+#os.environ["SLACK_BOT_TOKEN"] = ""
+#os.environ["SLACK_SIGNING_SECRET"] = ""
 
 app = App(
-    signing_secret=os.environ["SIGNING_SECRET"],
+    token=os.environ.get("SLACK_BOT_TOKEN"),
+    signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
 )
-
 
 @app.message(":wave:")
 def message_hello(message, say):
