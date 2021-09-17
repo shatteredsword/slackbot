@@ -28,6 +28,41 @@ def message_hello(message, say):
         text=f"Hey there <@{message['user']}>!",
     )
 
+# The test_callback shortcut listens to a shortcut with the callback_id "test_callback"
+@app.shortcut("test_callback")
+def open_modal(ack, shortcut, client):
+    # Acknowledge the shortcut request
+    ack()
+    # Call the views_open method using the built-in WebClient
+    client.views_open(
+        trigger_id=shortcut["trigger_id"],
+        # A simple view payload for a modal
+        view={
+            "type": "modal",
+            "title": {"type": "plain_text", "text": "My App"},
+            "close": {"type": "plain_text", "text": "Close"},
+            "blocks": [
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "About the simplest modal you could conceive of :smile:\n\nMaybe <https://api.slack.com/reference/block-kit/interactive-components|*make the modal interactive*> or <https://api.slack.com/surfaces/modals/using#modifying|*learn more advanced modal use cases*>."
+                    }
+                },
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "mrkdwn",
+                            "text": "Psssst this modal was designed using <https://api.slack.com/tools/block-kit-builder|*Block Kit Builder*>"
+                        }
+                    ]
+                }
+            ]
+        }
+    )
+
+
 
 # Start your app
 if __name__ == "__main__":
