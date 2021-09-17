@@ -3,11 +3,11 @@ import os
 import logging
 from slack_bolt import App
 #os.environ["SLACK_BOT_TOKEN"] = ""
-#os.environ["SLACK_SIGNING_SECRET"] = ""
+#os.environ["SIGNING_SECRET"] = ""
 
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
-    signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
+    signing_secret=os.environ.get("SIGNING_SECRET")
 )
 
 @app.message(":wave:")
