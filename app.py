@@ -74,6 +74,25 @@ def repeat_text(ack, respond, command):
     respond(f"{command['text']}")
 
 
+# attempt to recreate the beertime app
+@app.command("/beertime2")
+def beertime(ack, respond, command):
+    # Acknowledge command request
+    ack()
+    say(
+        blocks=[
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Use command `/beertime` to set an acceptable day and time where you and your team can share a beer in the office.\nAvailable commands are:\n- `/beertime list` get a list of beer times already configured\n- `/beertime set <day> <time>` set a new beer time (ex: /beertime set friday 4pm)\n- `/beertime remove <day>` remove beer time for a day (ex: /beertime remove friday)\n- `/beertime clear` remove all beer times\n- `/beertime next` displays how long until the next beer time\n\nNote: you cannot have more than 1 beer time on a single day.\n\nFor more help, go to [beertime.mathieuimbert.com/help](http://beertime.mathieuimbert.com/help). This app is completely free, please support me on [Patreon](https://patreon.com/mimbert) to help me pay for the infrastructure / beer, thanks!",
+                },
+            }
+        ],
+        text=f"Hey there <@{message['user']}>!",
+    )
+
+
 # Start your app
 if __name__ == "__main__":
     app.start(port=int(os.environ.get("PORT", 8080)))
