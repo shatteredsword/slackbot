@@ -85,7 +85,7 @@ def beertime(ack, say, command):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "Use command `/beertime` to set an acceptable day and time where you and your team can share a beer in the office.\nAvailable commands are:\n- `/beertime list` get a list of beer times already configured\n- `/beertime set <day> <time>` set a new beer time (ex: /beertime set friday 4pm)\n- `/beertime remove <day>` remove beer time for a day (ex: /beertime remove friday)\n- `/beertime clear` remove all beer times\n- `/beertime next` displays how long until the next beer time\n\nNote: you cannot have more than 1 beer time on a single day.\n\nFor more help, go to <beertime.mathieuimbert.com/help>. This app is completely free, please support me on <https://patreon.com/mimbert|Patreon> to help me pay for the infrastructure / beer, thanks!",
+                    "text": "Use command `/beertime` to set an acceptable day and time where you and your team can share a beer in the office.\nAvailable commands are:\n- `/beertime list` get a list of beer times already configured\n- `/beertime set <day> <time>` set a new beer time (ex: /beertime set friday 4pm)\n- `/beertime remove <day>` remove beer time for a day (ex: /beertime remove friday)\n- `/beertime clear` remove all beer times\n- `/beertime next` displays how long until the next beer time\n\nNote: you cannot have more than 1 beer time on a single day.\n\nFor more help, go to <http://beertime.mathieuimbert.com/help|beertime.mathieuimbert.com/help>. This app is completely free, please support me on <https://patreon.com/mimbert|Patreon> to help me pay for the infrastructure / beer, thanks!",
                 },
             }
         ]
