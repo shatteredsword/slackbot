@@ -1,3 +1,2 @@
-dotenv==0.0.5
 slack-bolt==1.9.1; python_version >= "3.6"
 slack-sdk==3.11.1; python_full_version >= "3.6.0" and python_version >= "3.6"

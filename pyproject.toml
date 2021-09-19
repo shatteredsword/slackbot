@@ -7,7 +7,6 @@ authors = ["Sean Mayo <sean.mayo@matsonfruit.com>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 slack-bolt = "^1.9.1"
-dotenv = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
 

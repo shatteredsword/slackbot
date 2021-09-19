@@ -3,9 +3,9 @@ import os
 import logging
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-load_dotenv()
+#load_dotenv()
 
 # os.environ["SLACK_BOT_TOKEN"] = ""
 # os.environ["SIGNING_SECRET"] = ""
