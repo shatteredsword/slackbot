@@ -2,14 +2,16 @@ import datetime
 import os
 import logging
 from slack_bolt import App
+from slack_bolt.adapter.socket_mode import SocketModeHandler
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # os.environ["SLACK_BOT_TOKEN"] = ""
 # os.environ["SIGNING_SECRET"] = ""
+# os.environ["SLACK_APP_TOKEN"] = ""
 
-app = App(
-    token=os.environ.get("SLACK_BOT_TOKEN"),
-    signing_secret=os.environ.get("SIGNING_SECRET"),
-)
+app = App(token=os.environ.get("SLACK_BOT_TOKEN"))
 
 
 @app.message(":wave:")
@@ -94,4 +96,4 @@ def beertime(ack, respond, command):
 
 # Start your app
 if __name__ == "__main__":
-    app.start(port=int(os.environ.get("PORT", 8080)))
+    SocketModeHandler(app, os.environ.get("SLACK_APP_TOKEN")).start()
