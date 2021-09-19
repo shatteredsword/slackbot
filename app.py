@@ -76,10 +76,10 @@ def repeat_text(ack, respond, command):
 
 # attempt to recreate the beertime app
 @app.command("/beertime2")
-def beertime(ack, say, command):
+def beertime(ack, respond, command):
     # Acknowledge command request
     ack()
-    say(
+    respond(
         blocks=[
             {
                 "type": "section",
