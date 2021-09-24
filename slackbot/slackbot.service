@@ -1,0 +1,12 @@
+[Unit]
+Description=Slackbot Service
+After=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+ExecStart=/home/pi/.local/bin/poetry run python3 /home/pi/slackbot/client/slackbot.py
+
+[Install]
+WantedBy=multi-user.target
