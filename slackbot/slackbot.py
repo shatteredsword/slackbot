@@ -1,7 +1,6 @@
 import datetime
 import os
 import pyimgur
-from picamera import PiCamera
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 from time import sleep
@@ -14,10 +13,6 @@ im = pyimgur.Imgur(
     os.environ.get("IMGUR_CLIENT_ID"), os.environ.get("IMGUR_CLIENT_SECRET")
 )
 im.refresh_token = os.environ.get("IMGUR_REFRESH_TOKEN")
-camera = PiCamera()
-camera.rotation = 270
-camera.resolution = (2592, 1944)
-
 
 @app.message(":wave:")
 def message_hello(message, say):
@@ -105,9 +100,7 @@ def whiteboard(ack, say, respond, client, command):
     respond(
         text=f"taking photo. please wait..."
     )
-    camera.start_preview()
-    sleep(2)
-    camera.capture("/tmp/foo.jpg")
+    #get photo here somewhere
     title = str(datetime.datetime.now().timestamp())
     im.refresh_access_token()
     newimage = im.upload_image(
