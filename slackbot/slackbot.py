@@ -1,13 +1,10 @@
 from datetime import datetime
 from os import environ
-from picamera import PiCamera
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 from time import sleep
 from dotenv import load_dotenv
-
 load_dotenv()
-from loguru import logger
 
 app = App(token=environ.get("SLACK_BOT_TOKEN"))
 
@@ -120,9 +117,4 @@ def whiteboard(ack, say, respond, client, command):
 
 # Start your app
 if __name__ == "__main__":
-    logger.debug("debug message")
-    logger.info("info message")
-    logger.warning("warn message")
-    logger.error("error message")
-    logger.critical("critical message")
     SocketModeHandler(app, environ.get("SLACK_APP_TOKEN")).start()
