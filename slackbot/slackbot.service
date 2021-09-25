@@ -6,7 +6,7 @@ After=multi-user.target
 Type=simple
 User=pi
 Group=pi
-ExecStart=/home/pi/.local/bin/poetry run python3 /home/pi/slackbot/client/slackbot.py
+ExecStart=/usr/bin/dash /home/pi/slackbot/slackbot/bootstrap.sh
 
 [Install]
 WantedBy=multi-user.target
