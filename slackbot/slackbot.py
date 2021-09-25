@@ -1,6 +1,5 @@
-import datetime
-import os
-import pyimgur
+from datetime import datetime
+from os import environ
 from picamera import PiCamera
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
@@ -9,15 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from loguru import logger
 
-app = App(token=os.environ.get("SLACK_BOT_TOKEN"))
-im = pyimgur.Imgur(
-    os.environ.get("IMGUR_CLIENT_ID"), os.environ.get("IMGUR_CLIENT_SECRET")
-)
-im.refresh_token = os.environ.get("IMGUR_REFRESH_TOKEN")
-camera = PiCamera()
-camera.rotation = 270
-camera.resolution = (2592, 1944)
-
+app = App(token=environ.get("SLACK_BOT_TOKEN"))
 
 @app.message(":wave:")
 def message_hello(message, say):
@@ -105,18 +96,7 @@ def whiteboard(ack, say, respond, client, command):
     respond(
         text=f"taking photo. please wait..."
     )
-    camera.start_preview()
-    sleep(2)
-    camera.capture("/tmp/foo.jpg")
-    title = str(datetime.datetime.now().timestamp())
-    im.refresh_access_token()
-    newimage = im.upload_image(
-        path="/tmp/foo.jpg",
-        title=title,
-        description=title,
-        album=os.environ.get("IMGUR_ALBUM_ID"),
-    )
-    reply = newimage.link
+    reply = "https://designshack.net/wp-content/uploads/placehold.jpg"
     say(
         blocks=[
             {
@@ -124,7 +104,7 @@ def whiteboard(ack, say, respond, client, command):
                 "text": {
                     "type": "mrkdwn",
                     "text": "<https://imgur.com/a/"
-                    + os.environ.get("IMGUR_ALBUM_ID")
+                    + environ.get("IMGUR_ALBUM_ID")
                     + "|Album> / <"
                     + reply
                     + "|Image>",
@@ -145,4 +125,4 @@ if __name__ == "__main__":
     logger.warning('warn message')
     logger.error('error message')
     logger.critical('critical message')
-    SocketModeHandler(app, os.environ.get("SLACK_APP_TOKEN")).start()
+    SocketModeHandler(app, environ.get("SLACK_APP_TOKEN")).start()
