@@ -5,4 +5,6 @@ if [[ "$CAMERA" -ne "0" ]]; then
 fi
 sudo cp camera/camera.service /lib/systemd/system
 sudo systemctl daemon-reload
-sudo systemctl enable camera && sudo systemctl start camera && sudo systemctl status camera
+sudo systemctl enable camera && sudo systemctl start camera
+sleep 5s
+sudo systemctl status camera
