@@ -1,4 +1,5 @@
-sudo apt install python3-pip python3-picamera
+sudo apt install python3-pip
+pip3 install --user pipenv
 CAMERA=$(sudo raspi-config nonint get_camera)
 if [[ "$CAMERA" -ne "0" ]]; then
     sudo raspi-config nonint do_camera 0
