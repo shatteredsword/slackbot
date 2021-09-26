@@ -1,1 +1,1 @@
-gunicorn -b 0.0.0.0:5000 slackcam:app
+pipenv run gunicorn -w 5 slackcam:app
